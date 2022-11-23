@@ -21,7 +21,7 @@ class CoreDataManager{
         })
     }
     
-    func GuardarVigas(clvobra:Int32,clvviga:Int32,longitud:Int32,material:String,peso:Int32){
+    func GuardarVigas(clvobra:String,clvviga:String,longitud:String,material:String,peso:String){
         let viga = Vigas(context: persistenContainer.viewContext)
         viga.clvobra = clvobra
         viga.clvviga = clvviga

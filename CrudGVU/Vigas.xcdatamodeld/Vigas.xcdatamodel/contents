@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19461" systemVersion="21G115" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Vigas" representedClassName="Vigas" syncable="YES" codeGenerationType="class">
-        <attribute name="clvobra" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="clvviga" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="longitud" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="clvobra" optional="YES" attributeType="String"/>
+        <attribute name="clvviga" optional="YES" attributeType="String"/>
+        <attribute name="longitud" optional="YES" attributeType="String"/>
         <attribute name="material" optional="YES" attributeType="String"/>
-        <attribute name="peso" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="peso" optional="YES" attributeType="String"/>
     </entity>
     <elements>
         <element name="Vigas" positionX="-63" positionY="-18" width="128" height="104"/>

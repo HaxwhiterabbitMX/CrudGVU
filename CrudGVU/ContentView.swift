@@ -41,15 +41,42 @@ struct ContentView: View {
                         newlongitud = ""
                         newmaterial = ""
                         newpeso = ""
-                        ConsultarVigas()
+                        mostrarProductos()
                     }
                 }){
                     Text("Agregar")
                 }
+                List{
+                    ForEach(prodArray, id: \.self){
+                        viga in
+                        VStack{
+                            Text(viga.clvviga ?? "")
+                        }
+                        .onTapGesture{
+                            seleccionado = viga
+                            clvviga = viga.clvviga ?? ""
+                        }
+                    }.onDelete(perform: {
+                        indexSet in
+                        indexSet.forEach({ index in
+                            let viga = prodArray[index]
+                            coreDM.eliminarVigas(Viga: viga)
+                            mostrarProductos()
+                        })
+                    })
+                }.padding()
+                    .onAppear(perform: {mostrarProductos()})
             }
         }
+    }
+    
+    func mostrarProductos(){
+        prodArray = coreDM.ConsultarVigas()
+    }
+}
+        
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(coreDM: CoreDataManager())
     }
 }

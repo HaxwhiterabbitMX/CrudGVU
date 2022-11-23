@@ -11,7 +11,7 @@ import SwiftUI
 struct CrudGVUApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(coreDM: CoreDataManager())
         }
     }
 }
