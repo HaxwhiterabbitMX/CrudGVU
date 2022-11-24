@@ -22,17 +22,28 @@ struct ContentView: View {
     @State var newpeso=""
     @State var seleccionado:Vigas?
     @State var prodArray=[Vigas]()
+    @State var isTapped = false
     
     
     var body: some View {
         NavigationView{
             VStack{
                 NavigationLink(destination: VStack{
-                    TextField("clvobra:",text: self.$newclvobra).multilineTextAlignment(.center)
-                    TextField("clvviga:",text: self.$newclvviga).multilineTextAlignment(.center)
-                    TextField("longitud:",text:self.$newlongitud).multilineTextAlignment(.center)
-                    TextField("material:",text: self.$newmaterial).multilineTextAlignment(.center)
-                    TextField("peso:",text: self.$newpeso).multilineTextAlignment(.center)
+                
+                    TextField("Obra:",text:self.$newclvobra).textFieldStyle(RoundedBorderTextFieldStyle()).keyboardType(.numberPad)
+                    
+                  
+                    TextField("Viga:",text:self.$newclvviga).textFieldStyle(RoundedBorderTextFieldStyle()).keyboardType(.numberPad)
+                    
+                    
+                    TextField("longitud:",text:self.$newlongitud).textFieldStyle(RoundedBorderTextFieldStyle())
+                    
+                  
+                    TextField("material:",text:self.$newmaterial).textFieldStyle(RoundedBorderTextFieldStyle())
+                    
+                
+                    TextField("peso:",text:self.$newpeso).textFieldStyle(RoundedBorderTextFieldStyle())
+                    
                     
                     Button("Save"){
                         coreDM.GuardarVigas(clvobra: newclvobra, clvviga: newclvviga, longitud: newlongitud, material: newmaterial, peso: newpeso)
@@ -51,10 +62,20 @@ struct ContentView: View {
                         viga in
                         VStack{
                             Text(viga.clvviga ?? "")
+                            Text(viga.clvobra ?? "")
+                            Text(viga.longitud ?? "")
+                            Text(viga.material ?? "")
+                            Text(viga.peso ?? "")
                         }
                         .onTapGesture{
                             seleccionado = viga
                             clvviga = viga.clvviga ?? ""
+                            //seleccionado = viga
+                            clvobra = viga.clvobra ?? ""
+                            longitud = viga.longitud ?? ""
+                            material = viga.material ?? ""
+                            peso = viga.peso ?? ""
+                            isTapped.toggle()
                         }
                     }.onDelete(perform: {
                         indexSet in
@@ -66,6 +87,38 @@ struct ContentView: View {
                     })
                 }.padding()
                     .onAppear(perform: {mostrarProductos()})
+                
+                NavigationLink("",destination:
+                                VStack{
+                    TextField("Obra:",text:self.$clvobra).textFieldStyle(RoundedBorderTextFieldStyle()).keyboardType(.numberPad)
+                    
+                  
+                    TextField("Viga:",text:self.$clvviga).textFieldStyle(RoundedBorderTextFieldStyle()).keyboardType(.numberPad)
+                    
+                    
+                    TextField("longitud:",text:self.$longitud).textFieldStyle(RoundedBorderTextFieldStyle())
+                    
+                  
+                    TextField("material:",text:self.$material).textFieldStyle(RoundedBorderTextFieldStyle())
+                    
+                
+                    TextField("peso:",text:self.$peso).textFieldStyle(RoundedBorderTextFieldStyle())
+                    Button("Update"){
+                        seleccionado?.clvobra=clvobra
+                        seleccionado?.clvviga=clvviga
+                        seleccionado?.longitud=longitud
+                        seleccionado?.material=material
+                        seleccionado?.peso=peso
+                        
+                        coreDM.actualizarVigas(viga: seleccionado!)
+                        clvobra=""
+                        clvviga=""
+                        longitud=""
+                        material=""
+                        peso=""
+                        mostrarProductos()
+                    }
+                },isActive: $isTapped)
             }
         }
     }
