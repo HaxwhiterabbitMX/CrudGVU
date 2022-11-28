@@ -28,7 +28,11 @@ struct ContentView: View {
     var body: some View {
         NavigationView{
             VStack{
-                NavigationLink(destination: VStack{
+                Text("REGISTRO DE VIGAS")
+                    .font(.largeTitle)
+                    .bold()
+                    .foregroundColor(.red)
+                    NavigationLink(destination: VStack{
                 
                     TextField("Obra:",text:self.$newclvobra).textFieldStyle(RoundedBorderTextFieldStyle()).keyboardType(.numberPad)
                     
@@ -54,8 +58,12 @@ struct ContentView: View {
                         newpeso = ""
                         mostrarProductos()
                     }
+                        
                 }){
                     Text("Agregar")
+                        .underline()
+                        .foregroundColor(.black)
+                    
                 }
                 List{
                     ForEach(prodArray, id: \.self){
@@ -87,6 +95,7 @@ struct ContentView: View {
                     })
                 }.padding()
                     .onAppear(perform: {mostrarProductos()})
+                    .background(Color.black)
                 
                 NavigationLink("",destination:
                                 VStack{
@@ -119,6 +128,7 @@ struct ContentView: View {
                         mostrarProductos()
                     }
                 },isActive: $isTapped)
+                    
             }
         }
     }
